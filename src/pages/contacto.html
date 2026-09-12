@@ -1,0 +1,34 @@
+<!--
+title: Contacto — VitaDev
+description: Contactate con VitaDev y contanos qué necesita tu institución de salud en el NOA.
+activo: 
+breadcrumb: Contacto
+-->
+<section id="contacto">
+    <div class="wrap contact-grid">
+      <div class="contact-info">
+        <span class="eyebrow">Contacto</span>
+        <h1 style="margin-top:14px;">Conversemos sobre tu proyecto.</h1>
+        <p class="lead">Contanos qué necesita tu institución y te mostramos cómo podemos ayudarte a digitalizarla, paso a paso.</p>
+        <div class="contact-detail">
+          <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4c7fee" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg> contacto@vitadev.com.ar</div>
+          <div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4c7fee" stroke-width="2"><path d="M12 2C7 2 4 5.5 4 9.5c0 5.5 8 12.5 8 12.5s8-7 8-12.5C20 5.5 17 2 12 2z"/><circle cx="12" cy="9.5" r="2.5"/></svg> Tucumán, Argentina — con foco en el NOA</div>
+        </div>
+      </div>
+      <form onsubmit="event.preventDefault(); alert('¡Gracias! Te contactaremos a la brevedad.');">
+        <div class="field">
+          <label for="name">Nombre</label>
+          <input id="name" name="nombre" type="text" placeholder="Tu nombre" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="tu@institucion.com" required>
+        </div>
+        <div class="field">
+          <label for="msg">Contanos sobre tu proyecto</label>
+          <textarea id="msg" name="mensaje" placeholder="Ej: necesitamos digitalizar turnos e historia clínica en nuestra clínica..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+      </form>
+    </div>
+  </section>
