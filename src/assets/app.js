@@ -103,13 +103,15 @@ function iniciarFormulario() {
   const boton = form.querySelector('button[type="submit"]');
   const textoBoton = boton.textContent;
   const email = form.dataset.email;
+  // mailto con asunto y cuerpo ya escritos; lo arma build.js
+  const mailto = form.dataset.mailto || 'mailto:' + email;
 
   function mostrar(tipo, mensaje, conEmail) {
     estado.className = 'form-status form-status--' + tipo;
     estado.textContent = mensaje;
     if (conEmail) {
       const link = document.createElement('a');
-      link.href = 'mailto:' + email;
+      link.href = mailto;
       link.textContent = email;
       estado.append(' ', link, '.');
     }

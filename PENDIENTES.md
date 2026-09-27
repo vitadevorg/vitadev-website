@@ -6,7 +6,9 @@ historial de git; acá queda solo lo abierto.
 ## 1. Confirmar el número de WhatsApp
 
 Está en `build.js` (constante `WHATSAPP`) con un `TODO`. Se usa en el footer y
-en la página de contacto.
+en la página de contacto. En el mismo archivo están los mensajes que se
+precargan al abrir WhatsApp o el correo (`MENSAJE_WHATSAPP`, `CUERPO_CONTACTO`,
+`CUERPO_CV`), por si quieren ajustar el texto.
 
 ## 2. Dominio propio
 

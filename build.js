@@ -17,8 +17,49 @@
 const fs = require('fs');
 const path = require('path');
 
-// TODO: confirmar el numero real. 
+// TODO: confirmar el numero real.
 const WHATSAPP = '5493863409588';
+const EMAIL = 'vitadev.org@gmail.com';
+
+// Mensajes que ya vienen escritos al abrir WhatsApp o el correo desde el
+// sitio, para que la persona no arranque de cero. Se editan solo aca.
+const MENSAJE_WHATSAPP =
+  'Hola VitaDev, quiero hacer una consulta sobre un sistema para mi institución. Mi nombre es ';
+const ASUNTO_CONTACTO = 'Consulta desde el sitio web';
+const CUERPO_CONTACTO = [
+  'Hola VitaDev,',
+  '',
+  'Quiero hacer una consulta sobre un sistema para mi institución.',
+  '',
+  'Nombre:',
+  'Institución:',
+  'Teléfono:',
+  '',
+  'Consulta:',
+  '',
+].join('\n');
+const ASUNTO_CV = 'Quiero sumarme a VitaDev';
+const CUERPO_CV = [
+  'Hola VitaDev,',
+  '',
+  'Me interesa sumarme al equipo. Adjunto mi CV.',
+  '',
+  'Nombre:',
+  'Perfil o rol:',
+  'Portfolio o LinkedIn:',
+  '',
+].join('\n');
+
+/* Arma un enlace mailto: con asunto y cuerpo. El & va como &amp; porque el
+   enlace termina dentro de un href. */
+const mailto = (asunto, cuerpo) =>
+  'mailto:' + EMAIL +
+  '?subject=' + encodeURIComponent(asunto) +
+  '&amp;body=' + encodeURIComponent(cuerpo);
+
+const WHATSAPP_URL = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(MENSAJE_WHATSAPP);
+const MAILTO_CONTACTO = mailto(ASUNTO_CONTACTO, CUERPO_CONTACTO);
+const MAILTO_CV = mailto(ASUNTO_CV, CUERPO_CV);
 
 // Direccion publica del sitio, sin barra final. Se usa en canonical, og:url,
 // og:image, sitemap.xml y robots.txt.
@@ -167,7 +208,10 @@ function construir({ silencioso = false } = {}) {
       .join('\n')
       // valores globales: pueden aparecer en cualquier parcial o pagina
       .split('{{sitio}}').join(SITIO)
-      .split('{{whatsapp}}').join(WHATSAPP)
+      .split('{{whatsapp_url}}').join(WHATSAPP_URL)
+      .split('{{mailto_contacto}}').join(MAILTO_CONTACTO)
+      .split('{{mailto_cv}}').join(MAILTO_CV)
+      .split('{{email}}').join(EMAIL)
       .split('{{formspree_url}}').join(FORMSPREE_URL)
       .split('{{anio}}').join(String(new Date().getFullYear()));
 
