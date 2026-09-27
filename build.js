@@ -20,6 +20,16 @@ const path = require('path');
 // TODO: confirmar el numero real. 
 const WHATSAPP = '5493863409588';
 
+// Direccion publica del sitio, sin barra final. Se usa en canonical, og:url,
+// og:image, sitemap.xml y robots.txt.
+const SITIO = 'https://vitadev-website.vercel.app';
+
+// Formulario de contacto: el codigo que da Formspree, lo que va despues de
+// /f/ en https://formspree.io/f/xxxxxxxx. Vacio, el formulario no finge que
+// envia: le avisa a la persona y le ofrece el email.
+const FORMSPREE_ID = 'xnpnolwv';
+const FORMSPREE_URL = FORMSPREE_ID ? 'https://formspree.io/f/' + FORMSPREE_ID : '';
+
 const raiz = __dirname;
 const dirPartials = path.join(raiz, 'src', 'partials');
 const dirPaginas = path.join(raiz, 'src', 'pages');
@@ -28,6 +38,11 @@ const dirImg = path.join(raiz, 'src', 'img');
 const dirSalida = path.join(raiz, 'dist');
 
 const leer = (...p) => fs.readFileSync(path.join(...p), 'utf8');
+
+/* Escapa texto para meterlo en HTML, incluso dentro de un atributo
+   (title y description van a content="..."). */
+const escapar = (t) =>
+  t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 /* Separa el bloque de metadatos del contenido de la pagina. */
 function parsear(texto) {
@@ -71,7 +86,7 @@ function copiar(origen, nombre) {
 /* Envuelve el contenido en <main>, con breadcrumb y cta-band si la pagina
    los declara. Antes cada pagina repetia esas lineas. */
 function envolverMain(contenido, campos, breadcrumb, cta) {
-  const out = ['<main id="top">'];
+  const out = ['<main id="contenido">'];
 
   if (campos.breadcrumb) {
     out.push(breadcrumb.split('{{breadcrumb}}').join(campos.breadcrumb));
@@ -109,6 +124,7 @@ function construir({ silencioso = false } = {}) {
 
   limpiarSalida();
 
+  const urls = [];
   for (const archivo of paginas) {
     const { campos, contenido } = parsear(leer(dirPaginas, archivo));
 
@@ -116,11 +132,20 @@ function construir({ silencioso = false } = {}) {
       if (!campos[requerido]) throw new Error(archivo + ': falta "' + requerido + '"');
     }
 
+    // los metadatos son texto: un "&" o una comilla no deben romper el HTML.
+    // activo queda sin tocar porque se compara contra el href del header.
+    for (const clave of Object.keys(campos)) {
+      if (clave !== 'activo') campos[clave] = escapar(campos[clave]);
+    }
+
+    // la home se publica como la raiz del dominio, no como /index.html
+    const url = SITIO + '/' + (archivo === 'index.html' ? '' : archivo);
+    urls.push(url);
+
     const cabecera = head
       .split('{{title}}').join(campos.title)
-      .split('{{description}}').join(campos.description);
-
-    const pie = footer.split('{{whatsapp}}').join(WHATSAPP);
+      .split('{{description}}').join(campos.description)
+      .split('{{url}}').join(url);
 
     const salida = [
       '<!DOCTYPE html>',
@@ -134,15 +159,40 @@ function construir({ silencioso = false } = {}) {
       '<body>',
       marcarActivo(header, campos.activo),
       ...envolverMain(contenido, campos, breadcrumb, cta),
-      pie,
+      footer,
       '</body>',
       '</html>',
       '',
-    ].join('\n');
+    ]
+      .join('\n')
+      // valores globales: pueden aparecer en cualquier parcial o pagina
+      .split('{{sitio}}').join(SITIO)
+      .split('{{whatsapp}}').join(WHATSAPP)
+      .split('{{formspree_url}}').join(FORMSPREE_URL)
+      .split('{{anio}}').join(String(new Date().getFullYear()));
+
+    // un {{marcador}} que llega a dist/ es un error de tipeo o un campo faltante
+    const sobrante = salida.match(/\{\{\w+\}\}/);
+    if (sobrante) throw new Error(archivo + ': quedo sin reemplazar ' + sobrante[0]);
 
     fs.writeFileSync(path.join(dirSalida, archivo), salida, 'utf8');
     if (!silencioso) console.log('  dist/' + archivo.padEnd(16) + campos.title);
   }
+
+  // sitemap y robots para que Google encuentre todas las paginas
+  const sitemap = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ...urls.map((u) => '  <url><loc>' + u + '</loc></url>'),
+    '</urlset>',
+    '',
+  ].join('\n');
+  fs.writeFileSync(path.join(dirSalida, 'sitemap.xml'), sitemap, 'utf8');
+  fs.writeFileSync(
+    path.join(dirSalida, 'robots.txt'),
+    'User-agent: *\nAllow: /\n\nSitemap: ' + SITIO + '/sitemap.xml\n',
+    'utf8'
+  );
 
   const nAssets = copiar(dirAssets, 'assets');
   const nImg = copiar(dirImg, 'img');
@@ -158,6 +208,9 @@ function correr(silencioso) {
     const r = construir({ silencioso });
     const resumen = r.paginas + ' paginas, ' + r.assets + ' assets, ' + r.img + ' imagenes -> dist/';
     console.log((silencioso ? '[' + hora() + '] ' : '\n') + resumen);
+    if (!FORMSPREE_ID) {
+      console.log('AVISO: FORMSPREE_ID vacio en build.js, el formulario de contacto no envia.');
+    }
     return true;
   } catch (e) {
     console.error('[' + hora() + '] ERROR: ' + e.message);
