@@ -2,17 +2,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{title}}</title>
 <meta name="description" content="{{description}}">
+<link rel="canonical" href="{{url}}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="icon" href="./img/vitadev-logo.png" type="image/png">
+<link rel="icon" href="./img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+<meta name="theme-color" content="#101c33">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="VitaDev">
 <meta property="og:title" content="{{title}}">
 <meta property="og:description" content="{{description}}">
-<meta property="og:image" content="./img/vitadev-logo.png">
+<meta property="og:url" content="{{url}}">
+<meta property="og:image" content="{{sitio}}/img/vitadev-logo.png">
 <meta property="og:locale" content="es_AR">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{{title}}">
 <meta name="twitter:description" content="{{description}}">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Lora:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./assets/styles.css">
+<script>
+  /* Animaciones al desplazarse: la clase se pone antes de pintar para que el
+     contenido no aparezca y desaparezca. Si app.js no llega a correr, a los
+     3 s se quita y todo se ve igual. */
+  if ('IntersectionObserver' in window) {
+    document.documentElement.classList.add('js-reveal');
+    setTimeout(function () {
+      if (!document.documentElement.dataset.revealListo) document.documentElement.classList.remove('js-reveal');
+    }, 3000);
+  }
+</script>

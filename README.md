@@ -30,6 +30,8 @@ src/
   img/
     vitadev-logo.png
     samsa-logo.png
+    favicon-32.png       ícono de la pestaña (solo el escudo)
+    apple-touch-icon.png ícono al guardar en la pantalla de inicio
 
 build.js               arma dist/ a partir de src/
 construir.cmd          doble clic: construye una vez
@@ -74,8 +76,9 @@ npx serve dist -l 4173
 
 ## Publicar
 
-Lo que se publica es el contenido de `dist/`, no la raíz del repositorio.
-Construís y subís esa carpeta al hosting.
+Lo que se publica es el contenido de `dist/`, no la raíz del repositorio. Hoy
+el sitio está en Vercel (https://vitadev-website.vercel.app), que corre el
+build y publica `dist/`. Con otro hosting, se construye y se sube esa carpeta.
 
 Como `dist/` no está versionada, si en algún momento usan GitHub Pages hay que
 generar el sitio en un workflow de GitHub Actions en vez de servir el repo tal
