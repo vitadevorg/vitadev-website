@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
 /* Bloques que aparecen al entrar en pantalla. Mantener igual a la lista
    de "ANIMACIONES AL DESPLAZARSE" en styles.css. */
 const SELECTOR_REVEAL = [
-  '.section-head', '.trust-item', '.card', '.explore-card', '.proj-card',
+  '.section-head','.proj-hero-copy', '.proj-hero-art', '.trust-item', '.card', '.explore-card', '.proj-card',
   '.about-col', '.why-item', '.sec-item', '.quality-statement', '.pillar',
   '.careers > div', '.careers-list > div', '.contact-info', '.contact-form', '.cta-band',
 ].join(',');
