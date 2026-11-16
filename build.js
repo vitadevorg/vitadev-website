@@ -130,7 +130,41 @@ function envolverMain(contenido, campos, breadcrumb, cta) {
   const out = ['<main id="contenido">'];
 
   if (campos.breadcrumb) {
-    out.push(breadcrumb.split('{{breadcrumb}}').join(campos.breadcrumb));
+    let padreHtml = '';
+
+    if (campos.breadcrumb_padre) {
+      const partes = campos.breadcrumb_padre.split('|');
+
+      if (
+        partes.length !== 2 ||
+        !/^[a-z0-9-]+\.html$/i.test(partes[0]) ||
+        !partes[1]
+      ) {
+        throw new Error(
+          'breadcrumb_padre debe tener formato archivo.html|Nombre'
+        );
+      }
+
+      if (!fs.existsSync(path.join(dirPaginas, partes[0]))) {
+        throw new Error(
+          'breadcrumb_padre no existe: ' + partes[0]
+        );
+      }
+
+      padreHtml =
+        '<a href="' + partes[0] + '">' +
+        partes[1] + '</a> / ';
+    }
+
+    out.push(
+      breadcrumb
+        .split('{{breadcrumb_padre}}').join(padreHtml)
+        .split('{{breadcrumb}}').join(campos.breadcrumb)
+    );
+  } else if (campos.breadcrumb_padre) {
+    throw new Error(
+      'breadcrumb_padre requiere breadcrumb'
+    );
   }
 
   out.push(contenido, '');
@@ -139,6 +173,7 @@ function envolverMain(contenido, campos, breadcrumb, cta) {
     if (!campos.cta_titulo || !campos.cta_texto) {
       throw new Error('cta_titulo y cta_texto van juntos');
     }
+
     out.push(
       cta
         .split('{{cta_titulo}}').join(campos.cta_titulo)
@@ -150,6 +185,7 @@ function envolverMain(contenido, campos, breadcrumb, cta) {
   out.push('</main>');
   return out;
 }
+ 
 
 /* Genera el sitio completo en dist/. */
 function construir({ silencioso = false } = {}) {

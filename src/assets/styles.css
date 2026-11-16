@@ -507,3 +507,776 @@ header.is-scrolled{box-shadow:0 8px 24px rgba(16,28,51,.08);}
   }
   .navlinks.mobile-open a.active::after{display:none;}
 }
+/* =====================================================
+   DETALLE DE PROYECTOS - VITADEV
+   Responsive y compatible con el diseño original
+   ===================================================== */
+
+/* COLORES DE CADA PROYECTO */
+
+.case-study--samsa {
+  --case-accent: #1e5fbf;
+  --case-ink: #1e5fbf;
+  --case-soft: #f0f4ff;
+}
+
+.case-study--turnos {
+  --case-accent: #059669;
+  --case-ink: #046c4e;
+  --case-soft: #e8f7ef;
+}
+
+.case-study--receta {
+  --case-accent: #d97706;
+  --case-ink: #92400e;
+  --case-soft: #fff4df;
+}
+
+.case-study--mente {
+  --case-accent: #6d28d9;
+  --case-ink: #5b21b6;
+  --case-soft: #f2edff;
+}
+
+/* TARJETAS DE PROYECTOS */
+
+.proj-card {
+  min-width: 0;
+}
+
+.proj-card .proj-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.proj-card .explore-link {
+  margin-top: auto;
+  padding-top: 15px;
+}
+
+.proj--samsa .explore-link {
+  color: #1e5fbf;
+}
+
+.proj--turnos .explore-link {
+  color: #046c4e;
+}
+
+.proj--receta .explore-link {
+  color: #92400e;
+}
+
+.proj--mente .explore-link {
+  color: #5b21b6;
+}
+
+.proj-card:hover .explore-link {
+  gap: 10px;
+}
+
+.proj-card:focus-visible {
+  outline: 3px solid var(--blue-500);
+  outline-offset: 4px;
+}
+
+/* BREADCRUMB */
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  overflow-wrap: anywhere;
+}
+
+.breadcrumb-sep {
+  color: var(--gray-400);
+}
+
+.breadcrumb [aria-current="page"] {
+  color: var(--navy-700);
+}
+
+/* HERO DE CADA PROYECTO */
+
+.case-hero .hero-tags {
+  margin-top: 16px;
+}
+
+.case-hero .tag {
+  background: var(--case-soft);
+  color: var(--case-ink);
+}
+
+.case-hero-copy {
+  min-width: 0;
+}
+
+.case-hero-copy .lead {
+  overflow-wrap: break-word;
+}
+
+.case-hero-visual {
+  min-width: 0;
+}
+
+/* PANEL DEL LOGO */
+
+.case-brand-panel {
+  width: 100%;
+  max-width: 460px;
+  height: 100%;
+  min-height: 260px;
+
+  border: 1px solid var(--line);
+  border-radius: 24px;
+
+  background: linear-gradient(
+    145deg,
+    var(--case-soft),
+    #fff 82%
+  );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.case-brand-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background-image: radial-gradient(
+    rgba(16, 28, 51, .07) 1px,
+    transparent 1px
+  );
+
+  background-size: 22px 22px;
+
+  mask-image: linear-gradient(
+    105deg,
+    transparent 30%,
+    #000
+  );
+}
+
+.case-brand-panel .proj-logo {
+  position: relative;
+  z-index: 1;
+
+  width: 176px;
+  height: 176px;
+  border-radius: 26px;
+}
+
+.case-brand-panel .proj-logo img {
+  padding: 12px;
+  object-fit: contain;
+}
+
+.case-brand-panel .proj-logo svg {
+  width: 92px;
+  height: 92px;
+}
+
+/* BOTONES */
+
+.case-hero-actions .btn {
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
+  justify-content: center;
+  line-height: 1.35;
+}
+
+/* SECCIONES INTERNAS */
+
+.case-challenge .section-head {
+  max-width: 760px;
+}
+
+.case-challenge .about-grid {
+  gap: 40px;
+}
+
+.case-modules .card {
+  min-width: 0;
+}
+
+.case-modules .card-icon {
+  background: var(--case-soft);
+}
+
+.case-modules .card p {
+  overflow-wrap: break-word;
+}
+
+/* SEGURIDAD */
+
+.case-security {
+  padding-bottom: 0;
+}
+
+.case-security .section-head {
+  max-width: 760px;
+}
+
+.case-security .trust {
+  margin-top: 32px;
+}
+
+.case-security .trust-item {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.case-security .trust-item svg {
+  flex-shrink: 0;
+  stroke: var(--blue-500);
+}
+
+/* VOLVER A PROYECTOS */
+
+.case-back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+
+  margin: -8px 0 32px;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--blue-500);
+}
+
+.case-back:hover {
+  color: var(--navy-900);
+}
+
+/* PROYECTOS RELACIONADOS */
+
+.case-related .section-head {
+  margin-bottom: 0;
+}
+
+.case-related-grid {
+  margin-top: 36px;
+}
+
+.case-related-grid > a {
+  display: block;
+  min-width: 0;
+}
+
+.case-related-grid .explore-card {
+  height: 100%;
+}
+
+.case-related-grid .proj-tag {
+  margin: 0;
+  color: var(--gray-600);
+}
+
+.case-related-grid .explore-card p {
+  overflow-wrap: break-word;
+}
+
+.case-related-grid > a:focus-visible {
+  outline: 3px solid var(--blue-500);
+  outline-offset: 4px;
+  border-radius: var(--radius);
+}
+
+/* =====================================================
+   RESPONSIVE - TABLETS
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+  .case-hero-visual {
+    order: 0;
+    height: 220px;
+  }
+
+  .case-brand-panel {
+    min-height: 0;
+    max-width: none;
+  }
+
+  .case-brand-panel .proj-logo {
+    width: 136px;
+    height: 136px;
+    border-radius: 22px;
+  }
+
+  .case-brand-panel .proj-logo svg {
+    width: 74px;
+    height: 74px;
+  }
+
+}
+
+/* =====================================================
+   RESPONSIVE - CELULARES
+   ===================================================== */
+
+@media (max-width: 560px) {
+
+  .case-hero .hero-ctas {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .case-hero .hero-ctas .btn {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .case-hero-visual {
+    height: 174px;
+  }
+
+  .case-brand-panel {
+    border-radius: var(--radius);
+  }
+
+  .case-brand-panel .proj-logo {
+    width: 112px;
+    height: 112px;
+    border-radius: 18px;
+  }
+
+  .case-brand-panel .proj-logo svg {
+    width: 62px;
+    height: 62px;
+  }
+
+  .case-back {
+    margin-bottom: 22px;
+  }
+
+  .case-related-grid {
+    margin-top: 28px;
+  }
+
+}
+
+/* =============================================================
+   VITADEV · HCE 2.0
+   Reemplaza SOLO el bloque anterior dedicado a HCE.
+   Conservá todo el resto de src/assets/styles.css.
+   ============================================================= */
+
+/* HERO */
+
+.hce-hero .hero-grid > * {
+  min-width: 0;
+}
+
+.hce-hero .hero-visual {
+  height: auto;
+  min-height: 470px;
+  overflow: visible;
+}
+
+.hce-hero .hero-tags {
+  margin-top: 24px;
+}
+
+.hce-hero .hce-actions .btn {
+  white-space: normal;
+  text-align: center;
+  justify-content: center;
+}
+
+/* INTERFAZ CONCEPTUAL HCE */
+
+.hce-demo,
+.hce-demo * {
+  box-sizing: border-box;
+}
+
+.hce-demo {
+  width: 100%;
+  max-width: 490px;
+  margin: auto;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: 0 24px 58px rgba(16, 28, 51, .13);
+  color: var(--navy-900);
+  text-align: left;
+}
+
+/* CABECERA DEL PANEL */
+
+.hce-demo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 16px;
+  background: var(--navy-900);
+  color: #fff;
+}
+
+.hce-demo-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  font: 700 12px var(--font-display);
+}
+
+.hce-demo-symbol {
+  display: grid;
+  place-items: center;
+  flex: 0 0 26px;
+  height: 26px;
+  background: var(--blue-500);
+  border-radius: 7px;
+  font: 700 20px var(--font-display);
+}
+
+.hce-demo-label {
+  font: 600 9px var(--font-mono);
+  color: #dbe6ff;
+  white-space: nowrap;
+}
+
+/* CONTENIDO DEL PANEL */
+
+.hce-demo-content {
+  padding: 20px;
+}
+
+/* FICHA DEL PACIENTE */
+
+.hce-demo-patient {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.hce-demo-avatar {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--blue-100);
+  color: var(--blue-500);
+}
+
+.hce-demo-patient-text {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hce-demo-muted {
+  font: 700 9px var(--font-mono);
+  color: var(--blue-500);
+}
+
+.hce-demo-patient-text strong {
+  font: 700 14px var(--font-display);
+}
+
+.hce-demo-patient-text > span:last-child {
+  font-size: 11px;
+  color: var(--gray-600);
+}
+
+.hce-demo-status {
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: #e8f7ef;
+  color: #066747;
+  font: 700 10px var(--font-mono);
+  white-space: nowrap;
+}
+
+/* PESTAÑAS DEL PANEL */
+
+.hce-demo-tabs {
+  display: flex;
+  gap: 23px;
+  margin: 20px 0 16px;
+  border-bottom: 1px solid var(--line);
+  color: var(--gray-600);
+  font-size: 11px;
+}
+
+.hce-demo-tabs span {
+  padding-bottom: 10px;
+}
+
+.hce-demo-tabs .hce-demo-tab-active {
+  color: var(--blue-500);
+  font-weight: 700;
+  border-bottom: 2px solid var(--blue-500);
+}
+
+/* TARJETA DE RESUMEN CLÍNICO */
+
+.hce-demo-card {
+  padding: 16px;
+  border: 1px solid #dce6f7;
+  border-radius: 13px;
+  background: #f8faff;
+}
+
+.hce-demo-card-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.hce-demo-card h3 {
+  font: 700 14px var(--font-display);
+}
+
+.hce-demo-card-heading > span {
+  font-size: 10px;
+  color: var(--gray-600);
+}
+
+.hce-demo-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.hce-demo-info > div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hce-demo-info small {
+  font: 700 9px var(--font-mono);
+  color: var(--blue-500);
+}
+
+.hce-demo-info strong {
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+/* LÍNEA DE TIEMPO CLÍNICA */
+
+.hce-demo-timeline {
+  padding-top: 20px;
+}
+
+.hce-demo-timeline-title {
+  display: block;
+  margin-bottom: 15px;
+  color: var(--gray-600);
+  font: 700 10px var(--font-mono);
+}
+
+.hce-demo-event {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  padding-bottom: 13px;
+}
+
+.hce-demo-dot {
+  flex: 0 0 11px;
+  height: 11px;
+  margin-top: 4px;
+  border: 2px solid var(--blue-500);
+  border-radius: 50%;
+  background: #fff;
+}
+
+.hce-demo-event strong {
+  font-size: 12px;
+}
+
+.hce-demo-event p {
+  margin-top: 4px;
+  color: var(--gray-600);
+  font-size: 11px;
+}
+
+/* PIE DEL PANEL */
+
+.hce-demo-footer {
+  padding: 11px 16px;
+  border-top: 1px solid var(--line);
+  background: #f8faff;
+  color: var(--gray-600);
+  text-align: center;
+  font: 500 9px var(--font-mono);
+}
+
+/* FRANJA DE CONFIANZA */
+
+.hce-trust svg {
+  color: var(--blue-500);
+  flex-shrink: 0;
+}
+
+/* TARJETAS DE FUNCIONALIDADES */
+
+.hce-features .card {
+  min-width: 0;
+}
+
+.hce-features .card p {
+  overflow-wrap: anywhere;
+}
+
+/* PASOS DEL PROCESO */
+
+.hce-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.hce-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  min-width: 0;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--white);
+}
+
+.hce-step > span {
+  font: 700 25px var(--font-display);
+  color: var(--blue-500);
+  line-height: 1;
+}
+
+.hce-step h3 {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+.hce-step p {
+  font-size: 14px;
+  color: var(--gray-600);
+}
+
+/* PROYECTO RELACIONADO SAMSA */
+
+.hce-related-link {
+  display: block;
+  max-width: 480px;
+}
+
+.hce-related-link .explore-card {
+  height: 100%;
+}
+
+.hce-related-link:focus-visible {
+  outline: 3px solid var(--blue-500);
+  outline-offset: 4px;
+  border-radius: var(--radius);
+}
+
+.hce-related-label {
+  font: 600 11px var(--font-mono);
+  color: var(--blue-500);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+/* ========================================
+   RESPONSIVE TABLET
+   ======================================== */
+
+@media (max-width: 900px) {
+
+  .hce-hero .hero-visual {
+    order: 0;
+    min-height: 0;
+    height: auto;
+  }
+
+  .hce-demo {
+    max-width: 560px;
+  }
+
+  .hce-steps {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+/* ========================================
+   RESPONSIVE CELULAR
+   ======================================== */
+
+@media (max-width: 560px) {
+
+  .hce-hero .hero-ctas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hce-hero .hero-ctas .btn {
+    width: 100%;
+  }
+
+  .hce-demo {
+    border-radius: 15px;
+  }
+
+  .hce-demo-header {
+    padding: 12px;
+  }
+
+  .hce-demo-brand {
+    font-size: 10px;
+  }
+
+  .hce-demo-label {
+    font-size: 7px;
+  }
+
+  .hce-demo-content {
+    padding: 13px;
+  }
+
+  .hce-demo-status {
+    display: none;
+  }
+
+  .hce-demo-tabs {
+    gap: 16px;
+  }
+
+  .hce-demo-info {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .hce-step {
+    padding: 20px;
+  }
+
+}
